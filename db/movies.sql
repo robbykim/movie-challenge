@@ -26,13 +26,13 @@ CREATE TABLE movie (
 
 CREATE TABLE movie_actor (
   actor_id INT REFERENCES actor(actor_id) ON UPDATE CASCADE,
-  movie_id INT REFERENCES movie(movie_id) ON UPDATE CASCADE,
+  movie_id INT REFERENCES movie(movie_id) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT movie_actor_id PRIMARY KEY (actor_id, movie_id)
 );
 
 CREATE TABLE genre_movie (
   genre_id INT REFERENCES genre(genre_id) ON UPDATE CASCADE,
-  movie_id INT REFERENCES movie(movie_id) ON UPDATE CASCADE,
+  movie_id INT REFERENCES movie(movie_id) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT movie_genre_id PRIMARY KEY (genre_id, movie_id)
 );
 
