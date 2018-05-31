@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import './navbar.css';
+import { Link } from 'react-router-dom';
+// import './navbar.css';
 
 class Navbar extends Component {
   render() {
     return (
-      <nav>
-
+      <nav className="navbar navbar-expand-xl">
+        <Link to="/" className="navbar-brand">InMotion Movies</Link>
       </nav>
     );
   }
 }
 
-export default App;
+export default Navbar;
