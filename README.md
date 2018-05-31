@@ -8,41 +8,41 @@ Create a webpage that manages a home movie collection.
 
 ## User Stories
 
-- As a user I want to use the app in the latest version of Chrome.
+[] As a user I want to use the app in the latest version of Chrome.
 
-- As a user I want to be able to enter new movies.
+[] As a user I want to be able to enter new movies.
 
-- As a user I want to be able to search existing movies by an arbitrary field.
+[] As a user I want to be able to search existing movies by an arbitrary field.
 
-- As a user I want to be able to see a list of all my movies.
+[] As a user I want to be able to see a list of all my movies.
 
-- As a user I want to be able to either DELETE and UPDATE a movie.
+[x] As a user I want to be able to either DELETE and UPDATE a movie.
 
-- As a user I want to record the following info about any given movie :
+[] As a user I want to record the following info about any given movie :
 
-    - Genre
+    [] Genre
 
-    - Actors
+    [] Actors
 
-    - Title
+    [] Title
 
-    - Year
+    [] Year
 
-    - Rating
+    [] Rating
 
 
 
 ## Technical Requirements
 
-- The page MUST be a single page application (though may have multiple routes and templates).
+[x] The page MUST be a single page application (though may have multiple routes and templates).
 
-- You MUST use ReactJS - pick one and be prepared to defend your decision
+[x] You MUST use ReactJS - pick one and be prepared to defend your decision
 
-- You MUST use git for version control.
+[x] You MUST use git for version control.
     
-- Please include a database
+[x] Please include a database
 
-- Please use a package manager such as npm or yarn
+[x] Please use a package manager such as npm or yarn
 
 
 
