@@ -7,7 +7,10 @@ const queries = require('./db/queries');
 
 const app = express();
 const port = process.env.PORT || 5000;
-const pool = new Pool();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL || 'postgres://localhost:5432/movies',
+  // ssl: true
+});
 
 app.use(bodyParser.json());
 
