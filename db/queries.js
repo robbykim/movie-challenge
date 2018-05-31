@@ -15,6 +15,10 @@ const GET_ALL_MOVIES = `SELECT
                         ON genre_movie.genre_id = genre.genre_id
                         GROUP BY movie.title, movie.year, movie.rating;`
 
+const GET_ALL_GENRES = `SELECT genre FROM genre;`;
+
+const GET_ALL_ACTORS = `SELECT actor FROM actor;`;
+
 const GET_MOVIE_BY_ID = `WITH tab as (
                          SELECT
                            movie.movie_id,
@@ -121,6 +125,8 @@ const DELETE_MOVIE = `DELETE FROM movie
 
 module.exports = {
   GET_ALL_MOVIES,
+  GET_ALL_ACTORS,
+  GET_ALL_GENRES,
   GET_ACTORS_BY_MOVIE,
   GET_ACTOR_BY_NAME,
   GET_GENRE_BY_NAME,

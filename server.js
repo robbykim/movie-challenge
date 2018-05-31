@@ -126,6 +126,42 @@ app.delete('/movies/:id', (req, res) => {
   });
 });
 
+app.get('/genres', (req, res) => {
+  pool.query(queries.GET_ALL_GENRES, (err, query) => {
+    if (err) {
+      res.sendStatus(500);
+    }
+
+    if (!query) {
+      res.sendStatus(500);
+    }
+
+    const genres = _.map(query.rows, (row) => {
+      return row.genre;
+    });
+
+    res.send(genres);
+  });
+});
+
+app.get('/actors', (req, res) => {
+  pool.query(queries.GET_ALL_ACTORS, (err, query) => {
+    if (err) {
+      res.sendStatus(500);
+    }
+
+    if (!query) {
+      res.sendStatus(500);
+    }
+
+    const actors = _.map(query.rows, (row) => {
+      return row.actor;
+    });
+
+    res.send(actors);
+  });
+});
+
 function isMovieValid(movie) {
   if (!('title' in movie)
       || !('genres' in movie)
