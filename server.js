@@ -13,6 +13,9 @@ const pool = new Pool({
 });
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
@@ -21,6 +24,7 @@ app.get('/api/hello', (req, res) => {
 app.get('/movies', (req, res) => {
   pool.query(queries.GET_ALL_MOVIES, (err, query) => {
     if (err) {
+      console.error(err);
       res.sendStatus(500);
     }
 
@@ -34,6 +38,7 @@ app.get('/movies', (req, res) => {
 
 app.post('/movies', (req, res) => {
   const movie = req.body;
+  console.log(req.body);
 
   if (!isMovieValid(movie)) {
     res.sendStatus(400);
@@ -46,7 +51,7 @@ app.post('/movies', (req, res) => {
       await client.query('BEGIN');
 
       // Insert Movie
-      const insertMovieValues = [movie.title, movie.year, movie.rating];
+      const insertMovieValues = [movie.title, parseInt(movie.year), parseInt(movie.rating)];
       const movieRes = await client.query(queries.POST_MOVIE, insertMovieValues);
       const movieId = movieRes.rows[0].movie_id;
 
@@ -81,7 +86,7 @@ app.put('/movies/:id', (req, res) => {
 
     try {
       await client.query('BEGIN');
-      const insertMovieValues = [movie.title, movie.year, movie.rating, movieId];
+      const insertMovieValues = [movie.title, parseInt(movie.year), parseInt(movie.rating), movieId];
       const movieRes = await client.query(queries.PUT_MOVIE, insertMovieValues);
 
       await removeMovieActorLinks(client, movie.actors, movieId);
@@ -171,15 +176,6 @@ function isMovieValid(movie) {
       || !('actors' in movie)
       || !('year' in movie)
       || !('rating' in movie)) {
-
-    return false;
-  }
-
-  if (typeof movie.year !== 'number'
-      || typeof movie.genres !== 'object'
-      || typeof movie.title !== 'string'
-      || typeof movie.actors !== 'object'
-      || typeof movie.rating !== 'number') {
 
     return false;
   }

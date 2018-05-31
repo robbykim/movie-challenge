@@ -1,4 +1,5 @@
 const GET_ALL_MOVIES = `SELECT
+                          movie.movie_id AS id,
                           title,
                           year,
                           rating,
@@ -13,7 +14,7 @@ const GET_ALL_MOVIES = `SELECT
                         ON genre_movie.movie_id = movie.movie_id
                         INNER JOIN genre
                         ON genre_movie.genre_id = genre.genre_id
-                        GROUP BY movie.title, movie.year, movie.rating;`
+                        GROUP BY movie.movie_id, movie.title, movie.year, movie.rating;`
 
 const GET_ALL_GENRES = `SELECT genre FROM genre;`;
 
