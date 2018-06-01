@@ -179,6 +179,14 @@ function isMovieValid(movie) {
     return false;
   }
 
+  if (movie.title.length > 40) {
+    return false;
+  }
+
+  if (parseInt(movie.rating) < 1 || parseInt(movie.rating) > 10) {
+    return false;
+  }
+
   return true;
 }
 
