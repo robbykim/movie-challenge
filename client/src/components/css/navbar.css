@@ -19,10 +19,14 @@
   margin-right: 10px;
 }
 
-.navbar-brand:hover,
+.navbar-light .navbar-brand:hover,
 .navbar__add-movie-link:hover {
   color: #DDD;
   text-decoration: none;
+}
+
+.navbar-light .navbar-brand:focus {
+  color: #fffcf9;
 }
 
 .navbar__search-input {
