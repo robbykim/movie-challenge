@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { MultiSelect, SimpleSelect } from 'react-selectize';
 import 'react-selectize/themes/index.css';
-import './movie-form.css';
+import './css/movie-form.css';
 
 class MovieForm extends Component {
   createActorFromSearch(options, values, search) {
@@ -105,6 +105,15 @@ class MovieForm extends Component {
     return ratingChoices;
   }
 
+  renderHeader() {
+    const { method } = this.props;
+    if (method === 'edit') {
+      return 'Edit Movie';
+    }
+
+    return 'Add New Movie';
+  }
+
   render() {
     const {
       movies,
@@ -120,21 +129,34 @@ class MovieForm extends Component {
     } = this.props;
 
     return (
-      <form onSubmit={validateForm}>
+      <form className="jumbotron" onSubmit={validateForm}>
         <div className="form-group">
-          <label htmlFor="movieTitle">Title</label>
+          <h1 className="movie-form__header">{this.renderHeader()}</h1>
+        </div>
+        <div className="form-group">
+          <label
+            htmlFor="movieTitle"
+            className="movie-form__label"
+          >
+            Title
+          </label>
           <input
             id="movieTitle"
             type="text"
             value={title || ''}
             onChange={(e) => updateTitleState(e.target.value)}
-            className="form-control"
+            className="form-control movie-form__title-input"
             placeholder="Enter movie title"
             aria-describedby="movieTitle"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="movieYear">Year</label>
+          <label
+            htmlFor="movieYear"
+            className="movie-form__label"
+          >
+            Year
+          </label>
           <SimpleSelect
             id="movieYear"
             value={this.getYearValue()}
@@ -145,7 +167,12 @@ class MovieForm extends Component {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="movieRating">Rating</label>
+          <label
+            htmlFor="movieRating"
+            className="movie-form__label"
+          >
+            Rating
+          </label>
           <SimpleSelect
             id="movieRating"
             value={this.getRatingValue()}
@@ -156,7 +183,12 @@ class MovieForm extends Component {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="movieActors">Actors</label>
+          <label
+            htmlFor="movieActors"
+            className="movie-form__label"
+          >
+            Actors
+          </label>
           <MultiSelect
             id="movieActors"
             values={this.getActorsValues()}
@@ -168,7 +200,12 @@ class MovieForm extends Component {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="movieGenre">Genres</label>
+          <label
+            htmlFor="movieGenre"
+            className="movie-form__label"
+          >
+            Genres
+          </label>
           <MultiSelect
             id="movieGenre"
             values={this.getGenresValues()}
@@ -179,7 +216,7 @@ class MovieForm extends Component {
             createFromSearch={(options, values, search) => this.createActorFromSearch(options, values, search)}
           />
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn movie-form__button">Submit</button>
       </form>
     );
   }

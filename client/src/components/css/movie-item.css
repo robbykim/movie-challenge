@@ -1,0 +1,43 @@
+.movie-item__title {
+  font-weight: 600;
+  color: #81B29A;
+  margin-bottom: 0px;
+}
+
+.movie-item__year-label,
+.movie-item__rating-label {
+  margin-right: 5px;
+  font-size: 13px;
+}
+
+.movie-item__year-value,
+.movie-item__rating-value {
+  font-size: 13px;
+}
+
+.movie-item__rating-container {
+  margin-bottom: 10px;
+}
+
+.movie-item__actor-title,
+.movie-item__genre-title {
+  font-weight: 600;
+  color: #81b29a;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.movie-item__button {
+  background: #E07A5F;
+  color: #FFFCF9;
+}
+
+.movie-list__genre-item,
+.movie-list__actor-item {
+  background: #81b29a;
+  color: white;
+}
+
+.movie-item__lists-container {
+  margin-bottom: 20px;
+}

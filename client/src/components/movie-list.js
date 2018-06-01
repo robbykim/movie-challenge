@@ -1,24 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './home.css';
-import Navbar from './navbar';
-import ApiManager from '../ApiManager';
+import './css/movie-list.css';
 
 class MovieList extends Component {
-  renderMovieList(movies) {
-    return movies.map((movie) => {
-      return (
-        <Link
-          to={`/movies/${movie.id}`}
-          className="movie-list-item"
-          key={`${movie.title}-${movie.year}`}
-        >
-          {movie.title}
-        </Link>
-      );
-    });
-  }
-
   filterMovies() {
     const searchKeywords = this.props.match.params.keywords
     if (!searchKeywords) {
@@ -77,12 +61,50 @@ class MovieList extends Component {
     return movies;
   }
 
+  renderMovieList(movies) {
+    return movies.map((movie) => {
+      return (
+        <div className="col-lg-4" key={`${movie.title}-${movie.year}`}>
+          <div className="card col-md-12 movie-list__card">
+            <div className="card-body">
+              <h4 className="card-title movie-list__card-title">{movie.title}</h4>
+              <span className="movie-list__card-year">
+                {movie.year}
+              </span>
+              <Link
+                to={`/movies/${movie.id}`}
+                className="movie-list__button btn"
+                key={`${movie.title}-${movie.year}`}
+              >
+                View
+              </Link>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  }
+
+  renderHeader() {
+    const searchKeywords = this.props.match.params.keywords
+    if (!searchKeywords) {
+      return 'All Movies:'
+    }
+
+    const keywords = searchKeywords.split('+');
+
+    return `Search - ${keywords.join(' ')}:`;
+  }
+
   render() {
     const movies = this.filterMovies();
 
     return (
       <div className="container">
-        {this.renderMovieList(movies)}
+        <span className="movie-list__header">{this.renderHeader()}</span>
+        <div className="row">
+          {this.renderMovieList(movies)}
+        </div>
       </div>
     );
   }

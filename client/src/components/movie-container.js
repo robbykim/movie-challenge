@@ -38,20 +38,20 @@ class MovieContainer extends Component {
       }
     }
 
-    const movieCb = (res) => {
-      movies = res || [];
+    const movieCb = (res, status) => {
+      movies = status === 'success' ? res : [];
       isMovieDone = true;
       changeState();
     };
 
-    const genreCb = (res) => {
-      genres = res || [];
+    const genreCb = (res, status) => {
+      genres = status === 'success' ? res : [];
       isGenreDone = true;
       changeState();
     };
 
-    const actorCb = (res) => {
-      actors = res || [];
+    const actorCb = (res, status) => {
+      actors = status === 'success' ? res : [];
       isActorDone = true;
       changeState();
     };

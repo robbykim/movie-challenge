@@ -1,0 +1,35 @@
+.navbar-container {
+  background: #81B29A;
+  margin-bottom: 20px;
+}
+
+.navbar-light .navbar-brand {
+  color: #FFFCF9;
+  font-weight: 600;
+}
+
+.nav-item {
+  padding: 10px 0;
+}
+
+.navbar__add-movie-link {
+  font-weight: 600;
+  color: #FFFCF9;
+  padding: 15px 0px;
+  margin-right: 10px;
+}
+
+.navbar-brand:hover,
+.navbar__add-movie-link:hover {
+  color: #DDD;
+  text-decoration: none;
+}
+
+.navbar__search-input {
+  border: none;
+}
+
+.navbar__search-button {
+  background: #E07A5F;
+  color: #FFFCF9;
+}

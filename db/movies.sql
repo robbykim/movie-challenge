@@ -42,10 +42,10 @@ INSERT INTO actor(actor)
   VALUES ('Chris Hemsworth'), ('Chris Evans'), ('Chris Pratt'), ('Ryan Reynolds');
 
 INSERT INTO movie(title, year, rating)
-  VALUES ('Avengers: Infinity War', 2018, 92), ('Deadpool 2', 2018, 90);
+  VALUES ('Avengers: Infinity War', 2018, 9), ('Deadpool 2', 2018, 8), ('12 Strong', 2017, 7);
 
 INSERT INTO movie_actor(actor_id, movie_id)
-  VALUES (1, 1), (2, 1), (3, 1), (4, 2);
+  VALUES (1, 1), (2, 1), (3, 1), (4, 2), (1, 3);
 
 INSERT INTO genre_movie(genre_id, movie_id)
-  VALUES (2, 1), (3, 1), (5, 1), (2, 2), (3, 2), (4, 2);
+  VALUES (2, 1), (3, 1), (5, 1), (2, 2), (3, 2), (4, 2), (2, 3), (5, 3);

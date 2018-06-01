@@ -3,7 +3,6 @@ import { MultiSelect, SimpleSelect } from 'react-selectize';
 import MovieForm from './movie-form';
 import ApiManager from '../ApiManager';
 import 'react-selectize/themes/index.css';
-import './movie-form.css';
 
 class MovieFormContainer extends Component {
   constructor() {
@@ -130,14 +129,26 @@ class MovieFormContainer extends Component {
   }
 
   updateYearState(values) {
+    let value = '';
+
+    if (values) {
+      value = values.value;
+    }
+
     this.setState({
-      year: values.value,
+      year: value,
     });
   }
 
   updateRatingState(values) {
+    let value = '';
+
+    if (values) {
+      value = values.value;
+    }
+
     this.setState({
-      rating: values.value,
+      rating: value,
     });
   }
 
@@ -158,6 +169,7 @@ class MovieFormContainer extends Component {
         actorsList={this.props.actors}
         genresList={this.props.genres}
         movies={this.props.movies}
+        method={this.props.method}
         validateForm={this.validateForm}
         updateActorState={this.updateActorState}
         updateGenreState={this.updateGenreState}

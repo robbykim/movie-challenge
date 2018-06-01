@@ -1,0 +1,53 @@
+.movie-multiselect.dropdown-menu {
+  top: initial;
+  left: initial;
+  display: initial;
+  float: initial;
+  padding: initial;
+  margin: initial;
+  font-size: initial;
+  border-radius: initial;
+  box-shadow: initial;
+}
+
+.movie-multiselect.react-selectize.default.root-node:not(.open) .react-selectize-control {
+  border: none;
+  background: white;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.multi-select.react-selectize.default.root-node .simple-value {
+  background: #81b29a;
+  color: white;
+  border: none;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.react-selectize.dropdown-menu.default .option-wrapper.highlight {
+  background: rgba(129, 178, 154, 0.2);
+}
+
+.movie-form__header {
+  font-size: 35px;
+  margin-bottom: 20px;
+  display: block;
+  color: #81B29A;
+  font-weight: 600;
+}
+
+.movie-form__label {
+  font-size: 20px;
+  display: block;
+  color: #81B29A;
+}
+
+.movie-form__title-input {
+  border: none;
+  width: 300px;
+}
+
+.movie-form__button {
+  background: #E07A5F;
+  color: #FFFCF9;
+  margin-top: 15px;
+}

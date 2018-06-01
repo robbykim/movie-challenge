@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './css/movie-item.css';
 
 class MovieItem extends Component {
   renderActors(movie) {
@@ -9,7 +10,12 @@ class MovieItem extends Component {
 
     return movie.actors.map((actor) => {
       return (
-        <li key={actor} className="movie-actor">{actor}</li>
+        <li
+          key={actor}
+          className="movie-list__actor-item list-group-item"
+        >
+          {actor}
+        </li>
       );
     });
   }
@@ -21,7 +27,12 @@ class MovieItem extends Component {
 
     return movie.genres.map((genre) => {
       return (
-        <li key={genre} className="movie-genre">{genre}</li>
+        <li
+          key={genre}
+          className="movie-list__genre-item list-group-item"
+        >
+          {genre}
+        </li>
       );
     });
   }
@@ -41,25 +52,42 @@ class MovieItem extends Component {
 
     return (
       <div className="container">
-        <span className="movie-title">{movie.title}</span>
-        <span className="movie-year">{movie.year}</span>
-        <span className="movie-rating">{movie.rating}</span>
-        <span className="movie-actor-title">Actors:</span>
-        <ul className="movie-actors-list">
-          {this.renderActors(movie)}
-        </ul>
-        <span className="movie-genre-title">Genres:</span>
-        <ul className="movie-genres-list">
-          {this.renderGenres(movie)}
-        </ul>
-        <Link to={`/edit-movie/${movie.id}`} className="btn">
-          <button className="btn">
-            Edit
+        <div className="jumbotron">
+          <h1 className="movie-item__title">{movie.title}</h1>
+          <div className="movie-item__year-container">
+            <span className="movie-item__year-label">Released:</span>
+            <span className="movie-item__year-value">{movie.year}</span>
+          </div>
+          <div className="movie-item__rating-container">
+            <span className="movie-item__rating-label">Rated:</span>
+            <span className="movie-item__rating-value">{movie.rating}/10</span>
+          </div>
+          <div className="row movie-item__lists-container">
+            <div className="movie-item__actors-container col-md-3">
+              <span className="movie-item__actor-title">Actors:</span>
+              <ul className="movie-item__actors-list list-group list-group-flush">
+                {this.renderActors(movie)}
+              </ul>
+            </div>
+            <div className="movie-item__genres-container col-md-3">
+              <span className="movie-item__genre-title">Genres:</span>
+              <ul className="movie-genres-list list-group list-group-flush">
+                {this.renderGenres(movie)}
+              </ul>
+            </div>
+          </div>
+          <Link to={`/edit-movie/${movie.id}`} className="btn">
+            <button className="btn movie-item__button">
+              Edit
+            </button>
+          </Link>
+          <button
+            onClick={() => deleteMovie(match.params.id)}
+            className="btn movie-item__button"
+          >
+            Delete
           </button>
-        </Link>
-        <button onClick={() => deleteMovie(match.params.id)} className="btn">
-          Delete
-        </button>
+        </div>
       </div>
     );
   }
