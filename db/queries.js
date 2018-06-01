@@ -14,7 +14,8 @@ const GET_ALL_MOVIES = `SELECT
                         ON genre_movie.movie_id = movie.movie_id
                         INNER JOIN genre
                         ON genre_movie.genre_id = genre.genre_id
-                        GROUP BY movie.movie_id, movie.title, movie.year, movie.rating;`
+                        GROUP BY movie.movie_id, movie.title, movie.year, movie.rating
+                        ORDER BY movie.movie_id DESC;`
 
 const GET_ALL_GENRES = `SELECT genre FROM genre;`;
 
@@ -22,7 +23,7 @@ const GET_ALL_ACTORS = `SELECT actor FROM actor;`;
 
 const GET_MOVIE_BY_ID = `WITH tab as (
                          SELECT
-                           movie.movie_id,
+                           movie.movie_id AS id,
                            title,
                            year,
                            rating,
@@ -39,7 +40,7 @@ const GET_MOVIE_BY_ID = `WITH tab as (
                          ON genre_movie.genre_id = genre.genre_id
                          GROUP BY movie.movie_id, movie.title, movie.year, movie.rating
                          )
-                         SELECT * FROM tab WHERE movie_id = $1;`;
+                         SELECT * FROM tab WHERE id = $1;`;
 
 const GET_ACTOR_BY_NAME = `SELECT actor_id FROM actor WHERE actor = $1;`
 

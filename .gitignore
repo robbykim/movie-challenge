@@ -1,6 +1,9 @@
 # dependencies
 /node_modules
 
+# local
+/local
+
 # testing
 /coverage
 

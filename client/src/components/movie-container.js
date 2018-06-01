@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import _ from 'underscore';
 import MovieList from './movie-list';
 import MovieItem from './movie-item';
-import MovieForm from './movie-form';
+import MovieFormContainer from './movie-form-container';
 import ApiManager from '../ApiManager';
 
 class MovieContainer extends Component {
@@ -14,7 +15,9 @@ class MovieContainer extends Component {
       genres: [],
     };
 
-    this.submitForm = this.submitForm.bind(this);
+    this.addMovie = this.addMovie.bind(this);
+    this.editMovie = this.editMovie.bind(this);
+    this.deleteMovie = this.deleteMovie.bind(this);
   }
 
   componentDidMount() {
@@ -58,16 +61,39 @@ class MovieContainer extends Component {
     ApiManager.getGenres(genreCb);
   }
 
-  submitForm(movie, method) {
-    const cb = (res) => {
-      console.log(res);
+  addMovie(movie) {
+    const movies = this.state.movies.slice();
+    movies.unshift(movie);
+
+    this.setState({
+      movies,
+    });
+  }
+
+  editMovie(movie) {
+    const movies = this.state.movies.slice();
+    const index = _.findIndex(movies, { id: movie.id });
+
+    movies[index] = movie;
+    this.setState({
+      movies,
+    });
+  }
+
+  deleteMovie(id) {
+    const deleteCb = (res) => {
+      const movies = _.filter(this.state.movies, (mov) => {
+        return mov.id !== parseInt(res.id);
+      });
+
+      this.setState({
+        movies,
+      });
+
+      this.props.history.push('/');
     }
 
-    if (method === 'add') {
-      ApiManager.postMovie(movie, cb);
-    } else {
-      ApiManager.putMovie(movie, cb);
-    }
+    ApiManager.deleteMovie(id, deleteCb);
   }
 
   render() {
@@ -78,6 +104,16 @@ class MovieContainer extends Component {
           path="/"
           render={props => (
             <MovieList
+              {...props}
+              movies={this.state.movies}
+            />
+          )}
+        />
+        <Route
+          path="/search/:keywords"
+          render={props => (
+            <MovieList
+              {...props}
               movies={this.state.movies}
             />
           )}
@@ -88,28 +124,33 @@ class MovieContainer extends Component {
             <MovieItem
               {...props}
               movies={this.state.movies}
+              deleteMovie={this.deleteMovie}
             />
           )}
         />
         <Route
           path="/add-movie"
           render={props => (
-            <MovieForm
+            <MovieFormContainer
               {...props}
               {...this.state}
               method="add"
               submitForm={this.submitForm}
+              addMovie={this.addMovie}
+              editMovie={this.editMovie}
             />
           )}
         />
         <Route
           path="/edit-movie/:id"
           render={props => (
-            <MovieForm
+            <MovieFormContainer
               {...props}
               {...this.state}
               method="edit"
               submitForm={this.submitForm}
+              addMovie={this.addMovie}
+              editMovie={this.editMovie}
             />
           )}
         />

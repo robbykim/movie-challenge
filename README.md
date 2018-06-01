@@ -8,27 +8,27 @@ Create a webpage that manages a home movie collection.
 
 ## User Stories
 
-[] As a user I want to use the app in the latest version of Chrome.
+[x] As a user I want to use the app in the latest version of Chrome.
 
-[] As a user I want to be able to enter new movies.
+[x] As a user I want to be able to enter new movies.
 
-[] As a user I want to be able to search existing movies by an arbitrary field.
+[x] As a user I want to be able to search existing movies by an arbitrary field.
 
-[] As a user I want to be able to see a list of all my movies.
+[x] As a user I want to be able to see a list of all my movies.
 
 [x] As a user I want to be able to either DELETE and UPDATE a movie.
 
-[] As a user I want to record the following info about any given movie :
+[x] As a user I want to record the following info about any given movie :
 
-    [] Genre
+    [x] Genre
 
-    [] Actors
+    [x] Actors
 
-    [] Title
+    [x] Title
 
-    [] Year
+    [x] Year
 
-    [] Rating
+    [x] Rating
 
 
 
@@ -78,3 +78,10 @@ You MAY use other publicly available JS components (please document separately a
 
 - Email that bundle to the person who sent you this coding challenge or host it on dropbox and email the link to download it.
 
+
+## TODOS:
+
+[] - Implement Edit and Delete button functionality for Frontend
+[] - Add bootstrap styles 
+[] - redirect on successful post/put
+[] - update state on frontend with added data to show movie list

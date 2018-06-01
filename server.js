@@ -38,7 +38,6 @@ app.get('/movies', (req, res) => {
 
 app.post('/movies', (req, res) => {
   const movie = req.body;
-  console.log(req.body);
 
   if (!isMovieValid(movie)) {
     res.sendStatus(400);
@@ -120,7 +119,7 @@ app.delete('/movies/:id', (req, res) => {
       await client.query(queries.DELETE_MOVIE, [movieId]);
       await client.query('COMMIT');
 
-      res.send({ movie_id: movieId });
+      res.send({ id: movieId });
     } catch (err) {
       await client.query('ROLLBACK');
       throw err;

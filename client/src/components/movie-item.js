@@ -30,6 +30,7 @@ class MovieItem extends Component {
     const {
       movies,
       match,
+      deleteMovie,
     } = this.props;
 
     const filteredMovies = movies.filter((movie) => {
@@ -56,7 +57,7 @@ class MovieItem extends Component {
             Edit
           </button>
         </Link>
-        <button className="btn">
+        <button onClick={() => deleteMovie(match.params.id)} className="btn">
           Delete
         </button>
       </div>

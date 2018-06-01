@@ -8,8 +8,12 @@ class Home extends Component {
   render() {
     return (
       <div className="container">
-        <Navbar />
-        <MovieContainer />
+        <Navbar
+          {...this.props}
+        />
+        <MovieContainer
+          {...this.props}
+        />
       </div>
     );
   }

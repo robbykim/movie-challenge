@@ -1,22 +1,9 @@
 import React, { Component } from 'react';
-import { MultiSelect } from 'react-selectize';
+import { MultiSelect, SimpleSelect } from 'react-selectize';
 import 'react-selectize/themes/index.css';
 import './movie-form.css';
 
 class MovieForm extends Component {
-  constructor() {
-    super();
-    this.state = {
-      title: null,
-      rating: null,
-      year: null,
-      actors: null,
-      genres: null,
-    };
-
-    this.validateForm = this.validateForm.bind(this);
-  }
-
   createActorFromSearch(options, values, search) {
     const labels = values.map(function(value){
         return value.label;
@@ -28,6 +15,10 @@ class MovieForm extends Component {
   }
 
   getOptions(options) {
+    if (!options) {
+      return [];
+    }
+
     return options.map((option) => {
       return {
         label: option,
@@ -36,76 +27,62 @@ class MovieForm extends Component {
     });
   }
 
-  validateForm(e) {
-    e.preventDefault();
-
-    // TODO: Add user feedback
-    const {
-      title,
-      rating,
-      year,
-      actors,
-      genres,
-    } = this.state;
-
-    const {
-      submitForm,
-      method,
-    } = this.props;
-
-    if (!title || !rating || !year || !actors || !genres) {
-      console.log('Missing Fields');
-      return;
+  getYearValue() {
+    const { year } = this.props;
+    if (year) {
+      return {
+        'label': year,
+        'value': year,
+      };
     }
-
-    if (!actors.length || !genres.length) {
-      console.log('Add at least one actor and genre');
-      return;
-    }
-
-    if (!title.trim().length) {
-      console.log('Please add a title');
-      return;
-    }
-
-    const movie = {
-      title,
-      rating,
-      year,
-      actors,
-      genres,
-    };
-
-    submitForm(movie, method);
   }
 
-  updateActorState(values) {
-    const actors = values.map((val) => {
-      return val.value;
-    });
-
-    this.setState({
-      actors,
-    });
+  getRatingValue(currentMovie) {
+    const { rating } = this.props;
+    if (rating) {
+      return {
+        'label': rating,
+        'value': rating,
+      };
+    }
   }
 
-  updateGenreState(values) {
-    const genres = values.map((val) => {
-      return val.value;
-    });
+  getActorsValues() {
+    const { actors } = this.props;
+    if (actors) {
+      return actors.map((actor) => {
+        return {
+          'label': actor,
+          'value': actor,
+        };
+      });
+    }
 
-    this.setState({
-      genres,
-    });
+    return [];
+  }
+
+  getGenresValues() {
+    const { genres } = this.props;
+    if (genres) {
+      return genres.map((genre) => {
+        return {
+          'label': genre,
+          'value': genre,
+        };
+      });
+    }
+
+    return [];
   }
 
   renderYearChoices() {
     const yearChoices = [];
 
     for (let i = 1920; i < 2019; i++) {
-      const option = (
-        <option key={i}>{i}</option>
-      );
+      const option = {
+        label: i.toString(),
+        value: i.toString(),
+      };
 
       yearChoices.unshift(option);
     }
@@ -116,10 +93,11 @@ class MovieForm extends Component {
   renderRatingChoices() {
     const ratingChoices = [];
 
-    for (let i = 0; i < 10; i++) {
-      const option = (
-        <option key={i}>{i + 1}</option>
-      );
+    for (let i = 1; i <= 10; i++) {
+      const option = {
+        label: i.toString(),
+        value: i.toString(),
+      };
 
       ratingChoices.unshift(option);
     }
@@ -128,49 +106,64 @@ class MovieForm extends Component {
   }
 
   render() {
+    const {
+      movies,
+      validateForm,
+      updateActorState,
+      updateTitleState,
+      updateGenreState,
+      updateYearState,
+      updateRatingState,
+      title,
+      actorsList,
+      genresList,
+    } = this.props;
+
     return (
-      <form onSubmit={this.validateForm}>
+      <form onSubmit={validateForm}>
         <div className="form-group">
           <label htmlFor="movieTitle">Title</label>
           <input
-            type="text"
-            className="form-control"
-            onChange={(e) => this.setState({ title: e.target.value })}
             id="movieTitle"
-            aria-describedby="movieTitle"
+            type="text"
+            value={title || ''}
+            onChange={(e) => updateTitleState(e.target.value)}
+            className="form-control"
             placeholder="Enter movie title"
+            aria-describedby="movieTitle"
           />
         </div>
         <div className="form-group">
           <label htmlFor="movieYear">Year</label>
-          <select
+          <SimpleSelect
             id="movieYear"
-            className="form-control"
-            onChange={(e) => this.setState({ year: e.target.value })}
-          >
-            <option selected>Choose...</option>
-            {this.renderYearChoices()}
-          </select>
+            value={this.getYearValue()}
+            options={this.renderYearChoices()}
+            className="movie-multiselect"
+            placeholder="Add Year"
+            onValueChange={(vals) => updateYearState(vals)}
+          />
         </div>
         <div className="form-group">
           <label htmlFor="movieRating">Rating</label>
-          <select
+          <SimpleSelect
             id="movieRating"
-            className="form-control"
-            onChange={(e) => this.setState({ rating: e.target.value })}
-          >
-            <option selected>Choose...</option>
-            {this.renderRatingChoices()}
-          </select>
+            value={this.getRatingValue()}
+            options={this.renderRatingChoices()}
+            className="movie-multiselect"
+            placeholder="Add Year"
+            onValueChange={(vals) => updateRatingState(vals)}
+          />
         </div>
         <div className="form-group">
           <label htmlFor="movieActors">Actors</label>
           <MultiSelect
             id="movieActors"
+            values={this.getActorsValues()}
+            options={this.getOptions(actorsList)}
             className="movie-multiselect"
-            options={this.getOptions(this.props.actors)}
-            onValuesChange={(vals) => this.updateActorState(vals)}
             placeholder="Add Actors"
+            onValuesChange={(vals) => updateActorState(vals)}
             createFromSearch={(options, values, search) => this.createActorFromSearch(options, values, search)}
           />
         </div>
@@ -178,9 +171,10 @@ class MovieForm extends Component {
           <label htmlFor="movieGenre">Genres</label>
           <MultiSelect
             id="movieGenre"
+            values={this.getGenresValues()}
             className="movie-multiselect"
-            options={this.getOptions(this.props.genres)}
-            onValuesChange={(vals) => this.updateGenreState(vals)}
+            options={this.getOptions(genresList)}
+            onValuesChange={(vals) => updateGenreState(vals)}
             placeholder="Add Genres"
             createFromSearch={(options, values, search) => this.createActorFromSearch(options, values, search)}
           />
