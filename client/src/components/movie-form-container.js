@@ -38,7 +38,12 @@ class MovieFormContainer extends Component {
       return null;
     }
 
-    if (!prevState.title || !prevState.rating || !prevState.year || !prevState.actors || !prevState.genres) {
+    if (prevState.title === null
+      || prevState.rating === null
+      || prevState.year === null
+      || prevState.actors === null
+      || prevState.genres === null
+    ) {
       return {
         title: currentMovie.title,
         rating: currentMovie.rating.toString(),
