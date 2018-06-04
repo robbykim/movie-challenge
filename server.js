@@ -17,10 +17,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' });
-});
-
 app.get('/movies', (req, res) => {
   pool.query(queries.GET_ALL_MOVIES, (err, query) => {
     if (err) {
