@@ -9,12 +9,19 @@ class MovieItem extends Component {
     }
 
     return movie.actors.map((actor) => {
+      const combinedActor = actor.replace(/ /g, '+');
+
       return (
         <li
           key={actor}
-          className="movie-list__actor-item list-group-item"
+          className="movie-item__actor-item list-group-item"
         >
-          {actor}
+          <Link
+            to={`/search/${combinedActor}`}
+            className="movie-item__link"
+          >
+            {actor}
+          </Link>
         </li>
       );
     });
@@ -26,12 +33,19 @@ class MovieItem extends Component {
     }
 
     return movie.genres.map((genre) => {
+      const combinedGenre  = genre.replace(/ /g, '+');
+
       return (
         <li
           key={genre}
-          className="movie-list__genre-item list-group-item"
+          className="movie-item__genre-item list-group-item"
         >
-          {genre}
+          <Link
+            to={`/search/${combinedGenre}`}
+            className="movie-item__link"
+          >
+            {genre}
+          </Link>
         </li>
       );
     });

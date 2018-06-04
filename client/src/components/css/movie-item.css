@@ -1,7 +1,6 @@
 .movie-item__title {
   font-weight: 600;
   color: #81B29A;
-  margin-bottom: 0px;
 }
 
 .movie-item__year-label,
@@ -32,9 +31,19 @@
   color: #FFFCF9;
 }
 
-.movie-list__genre-item,
-.movie-list__actor-item {
+.movie-item__genre-item,
+.movie-item__actor-item {
   background: #81b29a;
+  color: white;
+}
+
+.movie-item__link {
+  color: white;
+  text-decoration: none;
+}
+
+.movie-item__link:hover {
+  text-decoration: none;
   color: white;
 }
 
