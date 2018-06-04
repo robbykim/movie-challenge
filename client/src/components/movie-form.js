@@ -148,6 +148,8 @@ class MovieForm extends Component {
             className="form-control movie-form__title-input"
             placeholder="Enter movie title"
             aria-describedby="movieTitle"
+            maxLength="40"
+            required
           />
         </div>
         <div className="form-group">
